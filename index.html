@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Belit</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    label,
+    textarea {
+      display: block;
+    }
+
+    textarea {
+      resize: none;
+      overflow: hidden;
+      min-height: 50px;
+      width: 100%;
+    }
+
+    #result {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Belit</h1>
+  <p><dfn>Belit</dfn> - is a transliteration for Belarusian language into latin alphabet that requires
+    only characters from English keyboard and resembles English spelling as closely as possible. It's may intention is
+    to make it easier for foreigners from all over the world to read and write in Belarusian, especially if they don't
+    have cyrilic letters on their keyboard
+  </p>
+  <h2>Rules</h2>
+  <ul>
+    <li><b>y</b> letter always sounds like it does in the word <b>y</b>es</li>
+    <li><b>*</b> character makes the consonant before it sound soft (hard to explain to an english speaking person - you
+      just
+      have to hear how it sounds)</li>
+    <li>Letters <b>e</b> and <b>i</b> always make consonants before them sound soft (imagine they always have <b>*</b>
+      before
+      them)
+    </li>
+    <li>Except if there is a <b>'</b> character which makes the consonant before it sound normal</li>
+    <li>There are sounds that consist of two letters: <b>ch</b> (like in <b>ch</b>air), <b>sh</b> (like in
+      <b>sh</b>orts), <b>zh</b> (like in deci<b>si</b>on). If you see a <b>'</b> between these two letters (e.g.
+      <b>c'h</b>, <b>s'h</b>,<b>z'h</b>) - that just means they are pronounced separately and sound as they normally do
+    </li>
+  </ul>
+  <h2>Alphabet</h2>
+  <p>A a, B b, V v, G g, D d, E e, Zh zh, Z z, I i, Y y, K k, L l, M m, N n, O o, P p, R r, S s, T t, U u, W w, F f, H
+    h, Ch ch, Sh sh</p>
+  <label for="belInput">Right anything in belarusian language here:</label>
+  <textarea id="belInput" name="belInput">
+Беларуская мова — нацыянальная мова беларусаў, уваходзіць у індаеўрапейскую моўную сям'ю, славянскую групу, усходнеславянскую падгрупу. Пашырана ў асноўным у Беларусі. Распаўсюджана таксама і ў іншых краінах, галоўным чынам у Польшчы, Украіне, Расіі, Літве, Латвіі. Беларуская мова мае шмат агульных граматычных і лексічных уласцівасцей з іншымі ўсходнеславянскімі мовамі.
+
+Сучасная беларуская мова існуе ў літаратурнай і дыялектнай формах. Асноўны масіў падзяляецца на 2 вялікія дыялекты: паўночна-ўсходні і паўднёва-заходні, паміж якімі знаходзіцца паласа пераходных сярэднебеларускіх гаворак. Літаратурная мова гістарычна грунтуецца на гаворках цэнтральнай Беларусі
+
+Алфавіт літаратурнай мовы створаны на аснове кірыліцы. Часам выкарыстоўваецца беларуская лацінка (гл. беларускі лацінскі алфавіт).
+
+У 1990-х — 2000-х гадах практычна аформілася існаванне дзвюх беларускіх моўных норм: нормы беларускай мовы, распрацаванай у 1933 годзе і рэфармаванай у 1953 і 2008 гадах, і нормы, распрацаванай Браніславам Тарашкевічам у 1918 годзе, т. зв. «тарашкевіцы».
+  </textarea>
+  <p id="result"></p>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
