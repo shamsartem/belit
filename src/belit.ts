@@ -83,7 +83,7 @@ const consonantsThatCanBeSoftenedByVowels: Array<[BelChar, BelitChar]> = [
   ['г', 'g'],
   ['Д', 'D'],
   ['д', 'd'],
-  ['З', 'z'],
+  ['З', 'Z'],
   ['з', 'z'],
   ['К', 'K'],
   ['к', 'k'],
