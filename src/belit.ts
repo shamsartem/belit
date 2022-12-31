@@ -12,6 +12,16 @@ const vowelsThatMayNeedASoftSignBeforeThem: Array<[BelChar, BelitChar]> = [
   ['я', ['a', `${YOT_SMALL}a`]],
 ]
 
+const vowelsThatMayNeedASoftSignBeforeThemMap = new Map(
+  vowelsThatMayNeedASoftSignBeforeThem,
+)
+
+const smallLetterE: Array<[BelChar, BelitChar]> = [
+  ['е', ['e', `${YOT_SMALL}e`]],
+]
+
+const smallLetterEMap = new Map(smallLetterE)
+
 const smallLetterI: Array<[BelChar, BelitChar]> = [
   ['i', ['i', `${YOT_SMALL}i`]],
   ['і', ['i', `${YOT_SMALL}i`]],
@@ -22,20 +32,20 @@ const smallLetterIMap = new Map(smallLetterI)
 const vowelsThatNeverNeedAHardSignBeforeThem: Array<[BelChar, BelitChar]> = [
   ...vowelsThatMayNeedASoftSignBeforeThem,
   ...smallLetterI,
-  ['е', ['e', `${YOT_SMALL}e`]],
+  ...smallLetterE,
 ]
 
 const vowelsThatNeverNeedAHardSignBeforeThemMap = new Map(
   vowelsThatNeverNeedAHardSignBeforeThem,
 )
 
-const vowelsThatMayNeedASoftSignBeforeThemMap = new Map(
-  vowelsThatMayNeedASoftSignBeforeThem,
-)
-
 const vowelsThatMayNeedAHardSignBeforeThem: Array<[BelChar, BelitChar]> = [
   ['э', 'e'],
 ]
+
+const vowelsThatMayNeedAHardSignBeforeThemMap = new Map(
+  vowelsThatMayNeedAHardSignBeforeThem,
+)
 
 const restOfTheVowels: Array<[BelChar, BelitChar]> = [
   ['А', 'A'],
@@ -61,6 +71,7 @@ const vowels = [
   ...smallLetterI,
   ...restOfTheVowels,
 ]
+
 const vowelsMap = new Map(vowels)
 
 const consonantsThatCanBeSoftenedByVowels: Array<[BelChar, BelitChar]> = [
@@ -92,6 +103,8 @@ const consonantsThatCanBeSoftenedByVowels: Array<[BelChar, BelitChar]> = [
   ['т', 't'],
   ['Ф', 'F'],
   ['ф', 'f'],
+  ['Ц', 'Ts'],
+  ['ц', 'ts'],
   ['Х', 'H'],
   ['х', 'h'],
 ]
@@ -100,27 +113,41 @@ const consonantsThatCanBeSoftenedByVowelsMap = new Map(
   consonantsThatCanBeSoftenedByVowels,
 )
 
-const consonantsThatMayNeedAHardSignAfterThem: Array<[BelChar, BelitChar]> = [
+const consonantsThatMayNeedAYotAfterThem: Array<[BelChar, BelitChar]> = [
   ['Ў', 'W'],
   ['ў', 'w'],
 ]
 
 const consonantsThatMayRequireVowelWithYAfterThem = new Map(
-  consonantsThatMayNeedAHardSignAfterThem,
+  consonantsThatMayNeedAYotAfterThem,
 )
 
-const restOfTheConsonants: Array<[BelChar, BelitChar]> = [
-  ['Й', 'Y'],
-  ['й', 'y'],
+const consonantsNeverSoftenedByVowels: Array<[BelChar, BelitChar]> = [
   ['Ж', 'Zh'],
   ['ж', 'zh'],
-  ['Ц', 'Ts'],
-  ['ц', 'ts'],
   ['Ш', 'Sh'],
   ['ш', 'sh'],
   ['Ч', 'Ch'],
   ['ч', 'ch'],
 ]
+
+const consonantsNeverSoftenedByVowelsMap = new Map(
+  consonantsNeverSoftenedByVowels,
+)
+
+const yots: Array<[BelChar, BelitChar]> = [
+  ['Й', YOT_BIG],
+  ['й', YOT_SMALL],
+]
+
+const consonants: Array<[BelChar, BelitChar]> = [
+  ...consonantsThatCanBeSoftenedByVowels,
+  ...consonantsThatMayNeedAYotAfterThem,
+  ...consonantsNeverSoftenedByVowels,
+  ...yots,
+]
+
+const consonantsMap = new Map(consonants)
 
 const hardSigns: Array<[BelChar, BelitChar]> = [
   ['’', "'"],
@@ -139,9 +166,7 @@ const otherSymbols: Array<[BelChar, BelitChar]> = [...hardSigns, ...softSigns]
 const letters: Array<[BelChar, BelitChar]> = [
   ...vowels,
   ...restOfTheVowels,
-  ...consonantsThatCanBeSoftenedByVowels,
-  ...consonantsThatMayNeedAHardSignAfterThem,
-  ...restOfTheConsonants,
+  ...consonants,
   ...otherSymbols,
 ]
 
@@ -207,6 +232,15 @@ export const belToBelit = (bel: string): string =>
           return `${SOFT_SIGN}${vowel}`
         }
 
+        if (
+          (vowelsThatMayNeedASoftSignBeforeThemMap.has(belChar) ||
+            smallLetterEMap.has(belChar)) &&
+          maybePreviousBelChar !== undefined &&
+          consonantsNeverSoftenedByVowelsMap.has(maybePreviousBelChar)
+        ) {
+          return `${HARD_SIGN}${vowel}`
+        }
+
         return vowel
       }
 
@@ -216,6 +250,14 @@ export const belToBelit = (bel: string): string =>
       }
 
       const previousBelChar = maybePreviousBelChar
+
+      // For letter Э
+      if (
+        vowelsThatMayNeedAHardSignBeforeThemMap.has(belChar) &&
+        consonantsMap.has(previousBelChar)
+      ) {
+        return `${HARD_SIGN}${char}`
+      }
 
       // for generating c'h, s'h, z'h
       if (
