@@ -1,3 +1,4 @@
+import './style.css'
 import { belToBelit } from './belit'
 
 const belInputEl = document.getElementById('belInput') as HTMLTextAreaElement

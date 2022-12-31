@@ -1,0 +1,25 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+label,
+textarea {
+  display: block;
+}
+
+textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 50px;
+  width: 100%;
+}
+
+#result {
+  white-space: pre-wrap;
+}
