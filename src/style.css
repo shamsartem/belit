@@ -1,11 +1,30 @@
 * {
   box-sizing: border-box;
+  font-size: inherit;
 }
 
 body {
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 0 15px;
+  font-size: 20px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+p, li {
+  font-family: sans-serif;
+  line-height: 1.4;
+}
+
+label {
+  margin-bottom: 5px;
 }
 
 label,
